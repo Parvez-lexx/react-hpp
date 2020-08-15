@@ -1,11 +1,51 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
-import {ReactComponent as Logo} from '../../../../../src/assets/svg/hyke-icon.svg';
+import {ReactComponent as Logo} from '../../../assets/svg/hyke-icon.svg';
 
 class Loginpage extends Component{
+
+ state = {
+    email: "",
+    password: "",
+    emailError: false,
+    passwordError: false,
+  }
+
+ _handleEmail = (e) => {
+   const email = e.target.value; 
+   if(email === "" || !new RegExp(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}/g).test(email)){
+    this.setState({
+      email: email,
+      emailError: true
+    })
+   }
+   else{
+    this.setState({
+      email: email,
+      emailError: false
+    })
+   } 
+ }
+
+ _handlePassword = (e) => {
+   const password = e.target.value;
+   if(password === "" || password.length < 6){
+    this.setState({
+      password: password,
+      passwordError: true
+    })
+   }
+   else{
+    this.setState({
+      password: password,
+      passwordError: false
+    })
+   }
+ }
+
   render() {
-    return (
+      return (
       <div className={this.props.className}>
         <div className="wrapper">
           <div className="main-container">
@@ -20,11 +60,17 @@ class Loginpage extends Component{
               <form>
                 <div className="inp-field">
                   <label for="email">EMAIL ADDRESS</label>
-                  <input type="email" id="email" placeholder="Enter email address"></input>
+                  <input className={this.state.emailError ? "error-field-bdr" : ""} onChange={this._handleEmail} type="email" id="email" placeholder="Enter email address"></input>
+                  <span className="error-field">
+                  {this.state.emailError ? "This email is not valid" : null}
+                  </span>
                 </div>
                 <div className="inp-field">
                   <label for="password">PASSWORD</label>
-                  <input type="text" id="password" placeholder="Enter your password"></input>
+                  <input className={this.state.passwordError ? "error-field-bdr" : ""} onChange={this._handlePassword} type="text" id="password" placeholder="Enter your password"></input>
+                  <span className="error-field">
+                  {this.state.passwordError ? "This password in not valid" : null}
+                  </span>
                 </div>
                 <div className="submit-btn">
                   <button>Submit</button>
@@ -121,9 +167,6 @@ export default styled(Loginpage)`
     margin: 0 auto;
   }
 
-  .form-container .inp-field{
-    margin-bottom: 20px;
-  }
   .form-container{
     width: 340px;
     margin: auto;
@@ -131,6 +174,15 @@ export default styled(Loginpage)`
     border-radius: 7px;
     padding: 32px;
     box-shadow: 0 2px 2px 0 rgba(16, 19, 21, 0.1)
+  }
+  .form-container .inp-field{
+    margin-bottom: 20px;
+  }
+  .form-container span.error-field{
+    font-size: 12px;
+    color: red;
+    margin-top: 10px;
+    display: inline-block;
   }
   .form-container label{
     width: 100%;
@@ -146,6 +198,7 @@ export default styled(Loginpage)`
     border-radius: 3px;
     margin-top: 3px;
     padding-left: 10px;
+    outline: none;
   }
   .form-container .submit-btn{
     margin-top: 30px;
@@ -169,5 +222,9 @@ export default styled(Loginpage)`
     color: #6c7582;
     font-size: 14px;
     text-decoration: none;
+  }
+
+  .error-field-bdr{
+    border: 1px solid red !important;
   }
   `;

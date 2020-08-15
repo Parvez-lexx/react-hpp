@@ -1,6 +1,9 @@
 body{
   background-color: #f3f3f4;
 }
+button:disabled{
+  background-color: #a3d4d4 !important;
+}
 .App {
   text-align: center;
 }

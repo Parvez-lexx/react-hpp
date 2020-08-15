@@ -1,8 +1,9 @@
 import React from 'react';
 import './App.css';
 import {BrowserRouter, Switch, Route} from "react-router-dom";
-import Login from './modules/Login/Component/Page/Login.page';
+import Login from './modules/Login/Page/Login.page';
 import User from './modules/User/Page/User.page';
+import Registerpage from './modules/Register/Page/Register.page';
 
 function App() {
   return (
@@ -13,6 +14,9 @@ function App() {
         </Route>
         <Route path="/user">
           <User />
+        </Route>
+        <Route path="/register">
+          <Registerpage />
         </Route>
         <Route path="*">
           {
