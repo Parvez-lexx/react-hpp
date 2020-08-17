@@ -9,13 +9,11 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/login">
-          <Login />
-        </Route>
+        <Route path="/login" component={Login}></Route>
         <Route path="/user">
           <User />
         </Route>
-        <Route path="/register">
+        <Route path="/register" component={Registerpage}>
           <Registerpage />
         </Route>
         <Route path="*">

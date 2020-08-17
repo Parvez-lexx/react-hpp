@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
+import axios from 'axios';
 import {ReactComponent as Logo} from '../../../assets/svg/hyke-icon.svg';
+import {FieldInput} from "../../common/components/FieldInput"; 
 
 class Loginpage extends Component{
 
@@ -44,6 +46,15 @@ class Loginpage extends Component{
    }
  }
 
+ _handleSubmit = () => {
+   axios.get('https://jsonplaceholder.typicode.com/todos/1')
+   .then((response) => {
+    console.log(this)
+    this.props.history.push("/user")
+    console.log(response);
+  })
+ }
+
   render() {
       return (
       <div className={this.props.className}>
@@ -57,25 +68,29 @@ class Loginpage extends Component{
             </div>
             <h2 className="form-heading">Sign In to your account</h2>
             <div className="form-container">
-              <form>
                 <div className="inp-field">
                   <label for="email">EMAIL ADDRESS</label>
-                  <input className={this.state.emailError ? "error-field-bdr" : ""} onChange={this._handleEmail} type="email" id="email" placeholder="Enter email address"></input>
+                  {/* <input className={this.state.emailError ? "error-field-bdr" : ""} onChange={this._handleEmail} type="email" id="email" placeholder="Enter email address"></input> */}
+                  <FieldInput onChange={this._handleEmail} placeholder="Please Enter Your Email" isError={this.state.emailError} id="email" />
+                  {this.state.emailError ?
                   <span className="error-field">
-                  {this.state.emailError ? "This email is not valid" : null}
+                   "This email is not valid"
                   </span>
+                  : null}
                 </div>
                 <div className="inp-field">
                   <label for="password">PASSWORD</label>
-                  <input className={this.state.passwordError ? "error-field-bdr" : ""} onChange={this._handlePassword} type="text" id="password" placeholder="Enter your password"></input>
+                  <FieldInput onChange={this._handlePassword} placeholder="Please Enter Your Password" isError={this.state.passwordError} id="password" />
+                  {this.state.passwordError ?
                   <span className="error-field">
-                  {this.state.passwordError ? "This password in not valid" : null}
+                   "This password is not valid"
                   </span>
+                  : null}
                 </div>
                 <div className="submit-btn">
-                  <button>Submit</button>
+                  <button type="button" disabled={!this.state.email || !this.state.password || this.state.emailError || this.state.passwordError } onClick={this._handleSubmit}>Submit</button>
                 </div>
-              </form>
+              
             </div>
             <div className="link-field">
               <Link to="/">Forgot your password?</Link>
@@ -191,15 +206,6 @@ export default styled(Loginpage)`
     color: #6c7582;
     font-size: 11px;
   }
-  .form-container input{
-    width: 100%;
-    height: 40px;
-    border: 1px solid #cacdd1;
-    border-radius: 3px;
-    margin-top: 3px;
-    padding-left: 10px;
-    outline: none;
-  }
   .form-container .submit-btn{
     margin-top: 30px;
   }
@@ -212,6 +218,8 @@ export default styled(Loginpage)`
     font-size: 14px;
     font-weight: 500;
     width: 100%;
+    outline: none;
+    cursor: pointer;
     text-alight: center;
   }
   .wrapper .link-field{

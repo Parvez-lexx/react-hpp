@@ -1,7 +1,9 @@
 import React, {Component, Fragment} from 'react';
 import './Register.page.css';
 import styled from 'styled-components';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
+import axios from 'axios';
+import {FieldInput} from "../../common/components/FieldInput"; 
 
 export default class Registerpage extends Component{
     state = {
@@ -79,6 +81,15 @@ export default class Registerpage extends Component{
         }
     }
 
+    _handleSubmit = () => {
+        axios.get('https://jsonplaceholder.typicode.com/todos/1')
+        .then((response) => {
+         console.log(this)
+         this.props.history.push("/user")
+         console.log(response);
+       })
+    }
+
     render(){
         return(
             <Fragment>
@@ -88,34 +99,43 @@ export default class Registerpage extends Component{
                         <div className="form-container">
                             <div className="inp-field">
                                 <label for="name">Your Name</label>
-                                <input className={this.state.nameError ? "error-field-bdr" : ""} onChange={this._handleName} type="name" id="name" placeholder="Please Enter Your Name"></input>
+                                {/* <input className={this.state.nameError ? "error-field-bdr" : ""} onChange={this._handleName} type="name" id="name" placeholder="Please Enter Your Name"></input> */}
+                                <FieldInput onChange={this._handleName} placeholder="Please Enter Your Name" isError={this.state.nameError} id="name" />
+                                {this.state.nameError ?
                                 <span className="error-field">
-                                    {this.state.nameError ? "This name format is not valid" : null}
+                                "This name format is not valid"
                                 </span>
+                                : null}
                             </div>
                             <div className="inp-field">
                                 <label for="email">Your Email</label>
-                                <input className={this.state.emailError ? "error-field-bdr" : ""} onChange={this._handleEmail} type="email" id="email" placeholder="Please Enter Your Email"></input>
+                                <FieldInput onChange={this._handleEmail} placeholder="Please Enter Your Email" isError={this.state.emailError} id="email" />
+                                {this.state.emailError ?
                                 <span className="error-field">
-                                    {this.state.emailError ? "This email is not valid" : null}
+                                "This email is not valid"
                                 </span>
+                                : null}
                             </div>
                             <div className="inp-field">
                                 <label for="mobile">Your Mobile</label>
-                                <input className={this.state.mobileError ? "error-field-bdr" : ""} onChange={this._handleMobile} type="mobile" id="mobile" placeholder="Please Enter Your Mobile"></input>
+                                <FieldInput onChange={this._handleMobile} placeholder="Please Enter Your Mobile" isError={this.state.mobileError} id="number" />
+                                {this.state.mobileError ?
                                 <span className="error-field">
-                                    {this.state.mobileError ? "This mobile number is not valid" : null}
+                                "This mobile number is not valid"
                                 </span>
+                                : null}
                             </div>
                             <div className="inp-field">
                                 <label for="password">Your Password</label>
-                                <input className={this.state.passwordError ? "error-field-bdr" : ""} onChange={this._handlePassword} type="password" id="password" placeholder="Please Enter Your Password"></input>
+                                <FieldInput onChange={this._handlePassword} placeholder="Please Enter Your Password" isError={this.state.passwordError} id="password" />
+                                {this.state.passwordError ?
                                 <span className="error-field">
-                                    {this.state.passwordError ? "This password is not valid" : null}
+                                "This password is not valid"
                                 </span>
+                                : null}
                             </div>
                             <div className="submit-btn">
-                                <button type="button" disabled={this.state.nameError || this.state.emailError || this.state.mobileError || this.state.passwordError}>Submit</button>
+                                <button type="button" disabled={!this.state.name || !this.state.mobile || !this.state.email || !this.state.password || this.state.nameError || this.state.emailError || this.state.mobileError || this.state.passwordError}  onClick={this._handleSubmit}>Submit</button>
                             </div>
                         </div>
                     </div>
