@@ -2,10 +2,17 @@ import React from 'react'
 import styled from 'styled-components';
 
 function FieldInputComponent(props) {
-    console.log("props", props)
+    // console.log("props", props)
     return(
         <div className={props.className}>
-            <input className={props.isError ? "error-field-bdr" : ""} type={props.type}  placeholder={props.placeholder} onChange={props.onChange} id={props.id}  />                   
+            <input 
+                className={props.isError ? "error-field-bdr" : ""} 
+                type={props.type}  
+                placeholder={props.placeholder} 
+                onChange={props.onChange} 
+                id={props.id}
+                value={props.value}
+            />                   
         </div>
     )
 } 

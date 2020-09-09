@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import {Link, useHistory} from 'react-router-dom';
 import axios from 'axios';
 import {FieldInput} from "../../common/components/FieldInput"; 
+import {WhiteButton, BlueButton} from '../../common/components/Button.page';
 
 export default class Registerpage extends Component{
     state = {
@@ -118,7 +119,11 @@ export default class Registerpage extends Component{
                             </div>
                             <div className="inp-field">
                                 <label for="mobile">Your Mobile</label>
-                                <FieldInput onChange={this._handleMobile} placeholder="Please Enter Your Mobile" isError={this.state.mobileError} id="number" />
+                                <FieldInput 
+                                    onChange={this._handleMobile} 
+                                    placeholder="Please Enter Your Mobile" 
+                                    isError={this.state.mobileError} id="number" 
+                                />
                                 {this.state.mobileError ?
                                 <span className="error-field">
                                 "This mobile number is not valid"
@@ -127,15 +132,19 @@ export default class Registerpage extends Component{
                             </div>
                             <div className="inp-field">
                                 <label for="password">Your Password</label>
-                                <FieldInput onChange={this._handlePassword} placeholder="Please Enter Your Password" isError={this.state.passwordError} id="password" />
+                                <FieldInput onChange={this._handlePassword} placeholder="Please Enter Your Password" isError={this.state.passwordError} id="password" type="password" />
                                 {this.state.passwordError ?
                                 <span className="error-field">
                                 "This password is not valid"
                                 </span>
                                 : null}
                             </div>
-                            <div className="submit-btn">
+                            {/* <div className="submit-btn">
                                 <button type="button" disabled={!this.state.name || !this.state.mobile || !this.state.email || !this.state.password || this.state.nameError || this.state.emailError || this.state.mobileError || this.state.passwordError}  onClick={this._handleSubmit}>Submit</button>
+                            </div> */}
+                            <div>
+                                <WhiteButton disabled={!this.state.email || !this.state.password || this.state.emailError || this.state.passwordError } onClick={this._handleSubmit}>Cancel</WhiteButton>
+                                <BlueButton disabled={!this.state.email || !this.state.password || this.state.emailError || this.state.passwordError } onClick={this._handleSubmit}>Submit</BlueButton>
                             </div>
                         </div>
                     </div>

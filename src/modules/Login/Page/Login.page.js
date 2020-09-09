@@ -4,6 +4,8 @@ import {Link, useHistory} from 'react-router-dom';
 import axios from 'axios';
 import {ReactComponent as Logo} from '../../../assets/svg/hyke-icon.svg';
 import {FieldInput} from "../../common/components/FieldInput"; 
+import {BlueButton, WhiteButton} from "../../common/components/Button.page";
+import { Loader } from '../../common/components/Loader';
 
 class Loginpage extends Component{
 
@@ -12,6 +14,7 @@ class Loginpage extends Component{
     password: "",
     emailError: false,
     passwordError: false,
+    isClicked: false
   }
 
  _handleEmail = (e) => {
@@ -47,6 +50,10 @@ class Loginpage extends Component{
  }
 
  _handleSubmit = () => {
+  this.setState({
+    isClicked: true
+  })
+
    axios.get('https://jsonplaceholder.typicode.com/todos/1')
    .then((response) => {
     console.log(this)
@@ -54,6 +61,7 @@ class Loginpage extends Component{
     console.log(response);
   })
  }
+
 
   render() {
       return (
@@ -87,9 +95,24 @@ class Loginpage extends Component{
                   </span>
                   : null}
                 </div>
-                <div className="submit-btn">
+                {/* <div className="submit-btn">
                   <button type="button" disabled={!this.state.email || !this.state.password || this.state.emailError || this.state.passwordError } onClick={this._handleSubmit}>Submit</button>
+                </div> */}
+                <div>
+                  <WhiteButton 
+                    disabled={!this.state.email || !this.state.password || this.state.emailError || this.state.passwordError } 
+                    onClick={this._handleSubmit}
+                  >
+                    Cancel
+                  </WhiteButton>
+                  <BlueButton 
+                    disabled={!this.state.email || !this.state.password || this.state.emailError || this.state.passwordError } 
+                    onClick={this._handleSubmit} 
+                  >
+                    Submit
+                  </BlueButton>
                 </div>
+                {this.state.isClicked ? <Loader /> : null}
               
             </div>
             <div className="link-field">
@@ -205,22 +228,7 @@ export default styled(Loginpage)`
     font-weight: 500;
     color: #6c7582;
     font-size: 11px;
-  }
-  .form-container .submit-btn{
-    margin-top: 30px;
-  }
-  .form-container .submit-btn button{
-    background-color: #22bdbd;
-    border-radius: 6px;
-    border: 0;
-    color: white;
-    line-height: 48px;
-    font-size: 14px;
-    font-weight: 500;
-    width: 100%;
-    outline: none;
-    cursor: pointer;
-    text-alight: center;
+    text-align: left;
   }
   .wrapper .link-field{
     text-align: center;
