@@ -73,6 +73,7 @@ export const LeftPanel = styled(LeftPanelComponent)`
         width: 15%;
         height: 100vh;
         float: left;
+        // position: fixed;
     }
     .logo{
         border-bottom: 1px solid #1b2a3d;

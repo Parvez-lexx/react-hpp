@@ -1,28 +1,29 @@
 import React from 'react'
 import styled from 'styled-components';
 
-function FieldInputComponent(props) {
+function TextareaComponent(props) {
     // console.log("props", props)
     return(
         <div className={props.className}>
-            <input 
+            <textarea 
                 className={props.isError ? "error-field-bdr" : ""} 
-                type={props.type}  
                 placeholder={props.placeholder} 
                 onChange={props.onChange} 
                 id={props.id}
                 value={props.value}
+                rows="3"
+                style={props.style}
                 disabled={props.disabled}
             />                   
         </div>
     )
 } 
 
-FieldInputComponent.defaultProps = {
+TextareaComponent.defaultProps = {
    type: "text"
 }
 
-export const FieldInput = styled(FieldInputComponent)`
+export const Textarea = styled(TextareaComponent)`
 input{
     width: 100%;
     height: 40px;

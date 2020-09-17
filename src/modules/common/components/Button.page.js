@@ -24,3 +24,15 @@ export const BlueButton = styled.button`
     background-color: #2dbdbd;
     outline: none;
 `;
+
+export const RedButton = styled.button`
+    color: red;
+    font-size: 1em;
+    margin-top: 1rem;
+    margin-left: 1em;
+    padding: 0.75em 3.35em;
+    border: 1px solid red;
+    border-radius: 3px;
+    background-color: transparent;
+    outline: none;
+`;

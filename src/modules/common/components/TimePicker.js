@@ -11,6 +11,4 @@ function TimePickerComponent(props) {
     );
 }
 
-export const TimePicker = styled(TimePickerComponent)`
-    .
-`;
+export const TimePicker = styled(TimePickerComponent)``;

@@ -15,6 +15,7 @@ import { RoleDetails } from '../src/modules/User/RoleDetails';
 import { Order } from '../src/modules/Order/Page/Order';
 import { Practice } from '../src/modules/Practise/Page/Practice';
 import { Practice1 } from '../src/modules/Practise/Page/Practice1';
+import { OnboardRequest } from './modules/dealer/Page/OnboardRequest';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/register" component={Registerpage}>
           <Registerpage />
         </Route>
+        <Route path="/onboard-request"><OnboardRequest /></Route>
         <Route path="/practice"><Practice /></Route>
         <Route path="/practice1"><Practice1 /></Route>
         <Route path="/table"><Table /></Route>

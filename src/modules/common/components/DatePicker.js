@@ -6,23 +6,18 @@ import DatePicker from "react-datepicker";
 function DatePickerComponent(props) {
     return(
         <div className={props.className}>
-            <div className="wrapper">
                 <DatePicker
                     selected={props.selected}
                     onChange={props.onChange}
                 />
                 <i> <FaRegCalendarAlt /> </i>
-            </div>
         </div>
     );
 }
 
 export const DatePickerComp = styled(DatePickerComponent)`
-    .wrapper{
-        
-    }
+   position: relative;
     .react-datepicker-wrapper{
-        position: relative;
         input{
             border-radius: 3px;
             color: #878787;
@@ -30,12 +25,14 @@ export const DatePickerComp = styled(DatePickerComponent)`
             background-color: #ffffff;
             padding: 12px;
         }
-        i{
+        
+    }
+    i{
             position: absolute;
-            top: 11px;
-            right: 21px;
+            top: 12px;
+            right: 12px;
             color: #6c7582;
             font-size: 15px;
+            pointer-events: none;
         }
-    }
 `;
