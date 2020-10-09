@@ -67,7 +67,7 @@ class PersonalInfoComp extends Component {
                         <div className="inp-field">
                             <label for="fname">FIRST NAME</label>
                             <FieldInput 
-                                onChange={this.state._handleFirstName} 
+                                onChange={this._handleFirstName} 
                                 type="text"
                                 id="fname" 
                                 placeholder="Harris" 
@@ -76,7 +76,7 @@ class PersonalInfoComp extends Component {
                         <div className="inp-field">
                             <label for="lname">LAST NAME</label>
                             <FieldInput 
-                                onChange={this.state._handleLastName}
+                                onChange={this._handleLastName}
                                 type="text"
                                 id="lname" 
                                 placeholder="Anderson" 
@@ -87,7 +87,7 @@ class PersonalInfoComp extends Component {
                         <div className="inp-field">
                             <label for="email">EMAIL ADDRESS</label>
                             <FieldInput 
-                                onChange={this.state._handleEmail} 
+                                onChange={this._handleEmail} 
                                 type="email"
                                 id="email" 
                                 placeholder="allen.anderson@company.com" 
@@ -96,7 +96,7 @@ class PersonalInfoComp extends Component {
                         <div className="inp-field">
                             <label for="phone">PHONE NUMBER</label>
                             <FieldInput 
-                                onChange={this.state._handlePhone}
+                                onChange={this._handlePhone}
                                 type="number"
                                 id="phone" 
                                 placeholder="+971559988741" 
@@ -107,8 +107,8 @@ class PersonalInfoComp extends Component {
                         <div className="inp-field">
                             <label for="country">COUNTRY</label>
                             <FieldSelect 
-                                onChange={this.state.handleChangeCountry}
-                                options={this.state.country}
+                                onChange={this.handleChangeCountry}
+                                options={this.country}
                                 placeholder="Select country"
                             />
                         </div>

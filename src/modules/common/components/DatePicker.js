@@ -9,6 +9,7 @@ function DatePickerComponent(props) {
                 <DatePicker
                     selected={props.selected}
                     onChange={props.onChange}
+                    disabled={props.disabled}
                 />
                 <i> <FaRegCalendarAlt /> </i>
         </div>

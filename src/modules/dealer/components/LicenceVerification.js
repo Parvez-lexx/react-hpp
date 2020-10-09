@@ -10,8 +10,13 @@ import { FieldSelect } from '../../common/components/FieldSelect';
 class LicenceVerificationComp extends Component {
 
     tradeList = [
-        { value: 'Pending', label: 'Pending' },
-        { value: 'Rejected', label: 'Rejected' },
+        { value: 'Approved', label: 'Approved' },
+        { value: 'Rejected', label: 'Rejected' }
+    ];
+
+    reasonList = [
+        { value: 'Not Applicable', label: 'Not Applicable' },
+        { value: 'Need More Documents', label: 'Need More Documents' },
     ];
 
     state = {
@@ -21,7 +26,9 @@ class LicenceVerificationComp extends Component {
         tradeStatus: "",
         reason: '',
         startDate: new Date(),
-        disabled: true
+        disabled: true,
+        selectDisabled: true,
+        dateDisabled: true
     };
 
     handleChange = date => {
@@ -55,25 +62,44 @@ class LicenceVerificationComp extends Component {
         })
     }
 
-    _handleTradeStatus = tradeList => {
-        this.setState(
-            { tradeList }
-        )
+    _handleSplit = (e) => {
+        let inputVal = e.target.value;
+        inputVal = inputVal.replace(/[^\d]/g, "")
+        const formatedId = inputVal.replace(/(\d{3})(\d{3})(\d{3})/, "$1/$2/$3");
+        this.setState({
+            licenceNumber: formatedId
+        })
     }
 
-    _handleReason = (e) => {
-        const reason= e.target.value;
+    _handleTradeStatus = tradeList => {
+        // console.log("abcd", tradeList)
+        if(tradeList.value === "Approved") {
+            this.setState({
+                tradeList,
+                dateDisabled: false  
+            });
+        }else {
+            this.setState({
+                tradeList,
+                selectDisabled: false
+            });
+        }
+        this.props.hanldeStatusChange(tradeList)
+    }
+
+    _handleReason = reason => {
         this.setState({
             reason
         })
     }
 
     render() {
+        console.log(this.state)
         return(
             <div className={this.props.className}>
                 <div className="emirates-verification">
                     <h3>Trade Licence Verification</h3>
-                    <h5>LICENCE ERTIFICATION</h5>
+                    <h5>LICENCE CERTIFICATION</h5>
                     <div className="id-section">
                         <div className="image-wrap">
                             <div className="image">
@@ -98,10 +124,12 @@ class LicenceVerificationComp extends Component {
                             <div className="inp-field">
                                 <label for="licenceNumber">LICENCE NUMBER</label>
                                 <FieldInput 
+                                    onBlur={this._handleSplit}
                                     onChange={this._handleLicenceNumber} 
                                     type="text"
                                     id="licenceNumber" 
                                     placeholder="12345678" 
+                                    value={this.state.licenceNumber}
                                 />
                             </div>
                             <div className="inp-field">
@@ -109,6 +137,7 @@ class LicenceVerificationComp extends Component {
                                 <DatePickerComp
                                     selected={this.state.startDate}
                                     onChange={this.handleChange}
+                                    disabled={this.state.dateDisabled}
                                 />
                             </div>
                         </div>
@@ -117,19 +146,19 @@ class LicenceVerificationComp extends Component {
                                 <label for="tradeStatus">STATUS</label>
                                 <FieldSelect 
                                     id="tradeStatus"
-                                    onChange={this.handleTradeStatus}
-                                    options={this.state.tradeList}
-                                    placeholder="Approved"
+                                    onChange={this._handleTradeStatus}
+                                    options={this.tradeList}
+                                    placeholder="-- Select --"
                                 />
                             </div>
                             <div className="inp-field">
                                 <label for="reason">REASON</label>
-                                <FieldInput
-                                    placeholder= "Rejectionreason"
+                                <FieldSelect
+                                    placeholder= "-- Select --"
                                     onChange={this._handleReason}
-                                    type="text"
+                                    isDisabled = {this.state.selectDisabled}
+                                    options={this.reasonList}
                                     id="reason" 
-                                    disabled = {this.state.disabled}
                                 />
                             </div>
                         </div>

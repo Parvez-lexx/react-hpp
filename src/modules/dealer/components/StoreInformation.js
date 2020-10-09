@@ -102,7 +102,7 @@ class StoreInfoComp extends Component {
                         </div>
                     <div className="change-button">
                         <WhiteButton 
-                            onClick = {this.state._handleAddress} 
+                            onClick = {this._handleAddress} 
                             > Change Address
                         </WhiteButton>
                     </div>

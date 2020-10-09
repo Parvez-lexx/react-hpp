@@ -10,6 +10,7 @@ function FieldInputComponent(props) {
                 type={props.type}  
                 placeholder={props.placeholder} 
                 onChange={props.onChange} 
+                onBlur={props.onBlur}
                 id={props.id}
                 value={props.value}
                 disabled={props.disabled}

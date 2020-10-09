@@ -21,6 +21,7 @@ function FieldSelectComponent(props) {
           onChange={props.onChange}
           options={props.options}
           placeholder={props.placeholder}
+          isDisabled={props.isDisabled}
         />
     </div>
   );

@@ -14,8 +14,26 @@ import { BlueButton } from '../../common/components/Button.page';
 
 class DealerOnboardRequestComponent extends Component {
 
+    state = {
+        approveRequest: {},
+        rejectRequest: {},
+    };
+
+    _handleIdStatus = (approveRequest) => {
+            this.setState({
+                approveRequest
+            });
+    } 
+
+    _handleTradeStatus = (rejectRequest) => {
+            this.setState({
+                rejectRequest
+            });
+        
+    } 
+
+
     render() {
-        console.log(this.state)
         return(
             <div className={this.props.className}>
                 <LeftPanel />
@@ -23,10 +41,14 @@ class DealerOnboardRequestComponent extends Component {
                 <div className="wrapper">
                     <h1>Dealer Onboarding Request</h1>
                     <div className="content-wrapper">
-                       <PersonalInfo />
-                       <StoreInfo />
-                        <IdVerification />
-                        <LicenceVerification />
+                        <PersonalInfo />
+                        <StoreInfo />
+                        <IdVerification 
+                            hanldeStatusChange={this._handleIdStatus}
+                        />
+                        <LicenceVerification 
+                            hanldeStatusChange={this._handleTradeStatus}
+                        />
                         <VatRegistration />
                     </div>
                     <div className="buttons-wrap">
@@ -34,9 +56,19 @@ class DealerOnboardRequestComponent extends Component {
                             <WhiteButton> Go Back </WhiteButton>
                         </div>
                         <div className="btn-wrap">
-                            <RedButton> Reject Request </RedButton>
-                            <WhiteButton style={{marginLeft: 15}}> Request Re-upload </WhiteButton>
-                            <BlueButton> Approve Request </BlueButton>
+                            <RedButton 
+                                disabled= {!(this.state.approveRequest.value === "Rejected" || this.state.rejectRequest.value === "Rejected")}
+                            >   Reject Request 
+                            </RedButton>
+                            <WhiteButton 
+                                disabled = {!(this.state.approveRequest.value === "Rejected" || this.state.rejectRequest.value === "Rejected")}
+                                style={{marginLeft: 15}}> Request Re-upload 
+                            </WhiteButton>
+                            <BlueButton 
+                                onClick={this._handleApproveRequest}
+                                disabled={!(this.state.approveRequest.value === "Approved" && this.state.rejectRequest.value === "Approved")}
+                                > Approve Request 
+                            </BlueButton>
                         </div>
                     </div>
                 </div>
